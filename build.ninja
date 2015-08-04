@@ -1,0 +1,13 @@
+cflags = -g -I/usr/include/ctf -Isrc -ansi -pedantic -Wall -Wextra -Weverything
+ldflags = -ltak -ltabl -lmlist -lits
+
+rule compile
+ command = clang $cflags -c $in -o $out
+
+rule link
+ command = clang -o $out $in $ldflags
+
+build obj/main.o: compile src/main.c
+
+build bin/jailstat: link obj/main.o
+
